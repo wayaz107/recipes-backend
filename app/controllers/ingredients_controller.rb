@@ -10,7 +10,20 @@ class IngredientsController < ApplicationController
     end
 
     def create
-    end 
+        if params[:recipe_id]
+            @recipe = Recipe.find_by(recipe_id: params[:recipe_id])
+            @ingredient = @recipe.ingredients.build(ingredient_params)
+            if @ingredient.save
+                render json: IngredientSerializer.new(@ingredient).serialized_json, status: :ok
+            else
+                error_resp = {
+                    error: @ingredient.errors.full_messages.to_sentence
+                }
+                render json: error_resp, status: :unprocessable_entity
+            end
+        end
+        
+    end
 
     def update
     end 
