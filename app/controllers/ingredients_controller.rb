@@ -5,7 +5,9 @@ class IngredientsController < ApplicationController
     end
 
     def show
-    end 
+        @ingredient = find_by(id: params[:id])
+        render json: IngredientSerializer.new(@ingredient).serialized_json, status: :ok
+    end
 
     def create
     end 
