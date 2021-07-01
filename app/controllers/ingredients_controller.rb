@@ -25,6 +25,5 @@ class IngredientsController < ApplicationController
         
     end
 
-    def update
-    end 
+    
 end
