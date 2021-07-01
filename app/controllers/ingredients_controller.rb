@@ -1,6 +1,8 @@
 class IngredientsController < ApplicationController
     def index
-    end 
+        @ingredients = Ingredient.where(recipe_id: params[:recipe_id])
+        render json: IngredientSerializer.new(@ingredients).serialized_json, status: :ok
+    end
 
     def show
     end 
